@@ -1,64 +1,96 @@
 let pages=document.querySelectorAll(".page");
+
 let current=0;
 
 function nextPage(){
 
 pages[current].classList.remove("active");
+
 current++;
 
 if(current<pages.length){
+
 pages[current].classList.add("active");
+
 }
 
 }
+
+/* balloon pop */
 
 let popped=0;
 
-function popBalloon(balloon,wordId){
+function popBalloon(balloon,word){
 
 if(balloon.classList.contains("pop")) return;
 
+document.getElementById("popSound").play();
+
 balloon.classList.add("pop");
 
-document.getElementById(wordId).classList.add("show");
+document.getElementById(word).classList.add("show");
 
 popped++;
 
 if(popped===4){
 
-document.getElementById("finalBtn").style.display="inline-block";
+setTimeout(()=>{
 
-startConfetti();
+nextPage();
+
+},1200)
 
 }
 
 }
 
+/* typewriter message */
 
-/* Confetti */
+const message="A little surprise made just for you 💖";
 
-const canvas=document.getElementById("confetti");
+let i=0;
+
+function typeWriter(){
+
+if(i<message.length){
+
+document.getElementById("typeMessage").innerHTML+=message.charAt(i);
+
+i++;
+
+setTimeout(typeWriter,70);
+
+}
+
+}
+
+typeWriter();
+
+/* sparkles animation */
+
+const canvas=document.getElementById("sparkles");
+
 const ctx=canvas.getContext("2d");
 
 canvas.width=window.innerWidth;
+
 canvas.height=window.innerHeight;
 
-let confetti=[];
+let stars=[];
 
-function startConfetti(){
+for(let i=0;i<100;i++){
 
-for(let i=0;i<150;i++){
+stars.push({
 
-confetti.push({
 x:Math.random()*canvas.width,
+
 y:Math.random()*canvas.height,
-size:Math.random()*6+3,
-speed:Math.random()*3+2
+
+size:Math.random()*2,
+
+speed:Math.random()*0.5
+
 });
-
-}
-
-animate();
 
 }
 
@@ -66,17 +98,28 @@ function animate(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
-confetti.forEach(p=>{
+ctx.fillStyle="white";
 
-ctx.fillStyle=`hsl(${Math.random()*360},70%,70%)`;
-ctx.fillRect(p.x,p.y,p.size,p.size);
+stars.forEach(s=>{
 
-p.y+=p.speed;
+ctx.beginPath();
 
-if(p.y>canvas.height) p.y=0;
+ctx.arc(s.x,s.y,s.size,0,Math.PI*2);
+
+ctx.fill();
+
+s.y+=s.speed;
+
+if(s.y>canvas.height){
+
+s.y=0;
+
+}
 
 });
 
 requestAnimationFrame(animate);
 
 }
+
+animate();
