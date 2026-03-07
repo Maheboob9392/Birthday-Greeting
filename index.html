@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -15,10 +16,10 @@
 
 <body>
 
-<canvas id="sparkles"></canvas>
+<canvas id="sparkleCanvas"></canvas>
 
 <audio id="popSound">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_03c1b1c5f1.mp3?filename=balloon-pop-124476.mp3">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4c3c89b9b4.mp3">
 </audio>
 
 <div class="container">
@@ -27,26 +28,22 @@
 
 <div class="page active">
 
-<h2 id="nameTitle">Happy Birthday Sample 🎉</h2>
+<h1 class="name">Hey Cutiee..</h1>
 
-<div class="card">
+<p id="typeText"></p>
 
-<h1 id="typeMessage"></h1>
-
-</div>
-
-<button onclick="nextPage()">Next →</button>
+<button onclick="nextPage()">Open Surprise</button>
 
 </div>
 
 
-<!-- PAGE 2 -->
+<!-- PAGE 2 BALLOONS -->
 
 <div class="page">
 
-<h2>Pop the balloons 🎈</h2>
+<h2>Pop all balloons 🎈</h2>
 
-<div class="hidden-text">
+<div class="hiddenWords">
 
 <span id="w1">You</span>
 <span id="w2">are</span>
@@ -55,24 +52,24 @@
 
 </div>
 
-<div class="balloons">
+<div class="balloonRow">
 
-<div class="balloon-wrap">
+<div class="balloonWrap">
 <div class="balloon pink" onclick="popBalloon(this,'w1')"></div>
 <div class="string"></div>
 </div>
 
-<div class="balloon-wrap">
+<div class="balloonWrap">
 <div class="balloon peach" onclick="popBalloon(this,'w2')"></div>
 <div class="string"></div>
 </div>
 
-<div class="balloon-wrap">
+<div class="balloonWrap">
 <div class="balloon coral" onclick="popBalloon(this,'w3')"></div>
 <div class="string"></div>
 </div>
 
-<div class="balloon-wrap">
+<div class="balloonWrap">
 <div class="balloon purple" onclick="popBalloon(this,'w4')"></div>
 <div class="string"></div>
 </div>
@@ -84,14 +81,12 @@
 
 <!-- FINAL PAGE -->
 
-<div class="page final">
+<div class="page">
 
-<h1>Happy Birthday Sample 🎂</h1>
+<h1 class="finalTitle">Happy Birthday Dear🎂</h1>
 
 <p class="wish">
-
-May your life be full of happiness, love and endless smiles 💖
-
+May your life be full of happiness, smiles and love 💖
 </p>
 
 </div>
@@ -101,4 +96,5 @@ May your life be full of happiness, love and endless smiles 💖
 <script src="script.js"></script>
 
 </body>
+
 </html>
