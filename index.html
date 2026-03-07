@@ -1,117 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Birthday Surprise</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pacifico&display=swap" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <div class="bg-decorations">
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+    </div>
 
-<canvas id="sparkleCanvas"></canvas>
+    <div class="app-container">
+        <div id="screen-loader" class="screen active">
+            <div class="cake-icon">🎂</div>
+            <p class="title-text">Loading your birthday surprise...</p>
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
+        </div>
 
-<audio id="popSound">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4c3c89b9b4.mp3">
-</audio>
+        <div id="screen-start" class="screen">
+            <div class="card">
+                <div class="cute-character">🐼</div>
+                <h1 class="title-text">A Cutiepie was born today, 21 years ago!</h1>
+                <p class="subtitle-text">Yes, it's YOU! A little surprise awaits...</p>
+                <button class="btn" onclick="nextScreen('screen-start', 'screen-cake')">
+                    🎁 Start the surprise
+                </button>
+            </div>
+        </div>
 
-<div class="container">
+        <div id="screen-cake" class="screen">
+            <div class="banners" id="banners">
+                <div class="banner-triangle triangle-1"></div>
+                <div class="banner-triangle triangle-2"></div>
+                <div class="banner-triangle triangle-3"></div>
+                <div class="banner-triangle triangle-4"></div>
+                <div class="banner-triangle triangle-5"></div>
+            </div>
 
-<!-- PAGE 1 -->
+            <h1 class="title-text hide" id="birthday-greeting">Happy Birthday, Cutiepiee!</h1>
 
-<div class="page active">
+            <div class="card">
+                <div class="cake-container">
+                    <div class="cake">
+                        <div class="layer bottom-layer"></div>
+                        <div class="layer middle-layer"></div>
+                        <div class="layer top-layer">
+                            <div class="drip drip-1"></div>
+                            <div class="drip drip-2"></div>
+                            <div class="drip drip-3"></div>
+                            <div class="drip drip-4"></div>
+                        </div>
+                        <div class="candle" id="candle">
+                            <div class="flame" id="flame"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn" id="btn-decorate" onclick="decorate()">
+                    🪄 Decorate
+                </button>
+                <button class="btn hide" id="btn-light" onclick="lightCandle()">
+                    🔥 Light the Candle
+                </button>
+                <button class="btn hide" id="btn-next-balloons" onclick="nextScreen('screen-cake', 'screen-balloons')">
+                    Pop the Balloons ➔
+                </button>
+            </div>
+        </div>
 
-<h1 class="name">Happy Birthday HER_NAME 🎉</h1>
+        <div id="screen-balloons" class="screen">
+            <h1 class="title-text">Pop all 4 balloons</h1>
+            <div class="card balloon-card">
+                <svg class="balloon-strings" viewBox="0 0 200 200">
+                    <path d="M40,50 Q100,150 100,200" fill="none" stroke="#ccc" stroke-width="2"/>
+                    <path d="M80,40 Q100,150 100,200" fill="none" stroke="#ccc" stroke-width="2"/>
+                    <path d="M120,40 Q100,150 100,200" fill="none" stroke="#ccc" stroke-width="2"/>
+                    <path d="M160,50 Q100,150 100,200" fill="none" stroke="#ccc" stroke-width="2"/>
+                </svg>
 
-<p id="typeText"></p>
+                <div class="balloons-container">
+                    <div class="balloon-wrapper" style="--i:1;">
+                        <span class="hidden-word title-text">You</span>
+                        <div class="balloon color-1" onclick="popBalloon(this)"></div>
+                    </div>
+                    <div class="balloon-wrapper" style="--i:2;">
+                        <span class="hidden-word title-text">Are</span>
+                        <div class="balloon color-2" onclick="popBalloon(this)"></div>
+                    </div>
+                    <div class="balloon-wrapper" style="--i:3;">
+                        <span class="hidden-word title-text">Very</span>
+                        <div class="balloon color-3" onclick="popBalloon(this)"></div>
+                    </div>
+                    <div class="balloon-wrapper" style="--i:4;">
+                        <span class="hidden-word title-text">Gorgeous</span>
+                        <div class="balloon color-4" onclick="popBalloon(this)"></div>
+                    </div>
+                </div>
+                
+                <button class="btn disabled" id="btn-next-card" onclick="nextScreen('screen-balloons', 'screen-card')">
+                    Next ➔
+                </button>
+            </div>
+        </div>
 
-<button onclick="nextPage()">Open Surprise</button>
+        <div id="screen-card" class="screen">
+            <h1 class="title-text">A Special Message</h1>
+            <p class="subtitle-text">Tap to open</p>
+            <div class="card" style="background: transparent; box-shadow: none;">
+                <div class="envelope" onclick="openEnvelope()">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-body">
+                        <div class="letter">
+                            <h2 class="cursive-text">Happy Birthday!</h2>
+                            <p>Wishing you the most beautiful day filled with love, laughter, and everything your heart desires. Keep shining beautifully! ✨</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn hide mt-20" id="btn-next-gift" onclick="nextScreen('screen-card', 'screen-gift')">
+                    One Last Thing ➔
+                </button>
+            </div>
+        </div>
 
-</div>
+        <div id="screen-gift" class="screen">
+            <h1 class="title-text">A Little Gift For You</h1>
+            <div class="card" style="background: transparent; box-shadow: none;">
+                <div class="gift-box" onclick="openGift()">
+                    <div class="gift-lid"></div>
+                    <div class="gift-base">🎁</div>
+                </div>
+                <div class="gift-notes hide" id="gift-notes">
+                    <div class="note">Stay Awesome! 💖</div>
+                    <div class="note">Dream Big! 🌟</div>
+                    <div class="note">Smile Always! 😊</div>
+                </div>
+            </div>
+        </div>
 
+    </div>
 
-<!-- PAGE 2 GIFT BOX -->
+    <div id="confetti-container"></div>
 
-<div class="page giftPage">
-
-<h2>Tap the Gift 🎁</h2>
-
-<div class="giftBox" onclick="openGift()">
-
-<div class="lid"></div>
-
-<div class="box"></div>
-
-</div>
-
-</div>
-
-
-<!-- PAGE 3 BALLOONS -->
-
-<div class="page">
-
-<h2>Pop all balloons 🎈</h2>
-
-<div class="hiddenWords">
-
-<span id="w1">You</span>
-<span id="w2">are</span>
-<span id="w3">very</span>
-<span id="w4">Gorgeous</span>
-
-</div>
-
-<div class="balloonRow">
-
-<div class="balloonWrap">
-<div class="balloon pink" onclick="popBalloon(this,'w1')"></div>
-<div class="string"></div>
-</div>
-
-<div class="balloonWrap">
-<div class="balloon peach" onclick="popBalloon(this,'w2')"></div>
-<div class="string"></div>
-</div>
-
-<div class="balloonWrap">
-<div class="balloon coral" onclick="popBalloon(this,'w3')"></div>
-<div class="string"></div>
-</div>
-
-<div class="balloonWrap">
-<div class="balloon purple" onclick="popBalloon(this,'w4')"></div>
-<div class="string"></div>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- FINAL PAGE -->
-
-<div class="page">
-
-<h1 class="finalTitle">Happy Birthday 🎂</h1>
-
-<p class="wish">
-May your life be full of happiness, smiles and love 💖
-</p>
-
-</div>
-
-</div>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
-
 </html>
