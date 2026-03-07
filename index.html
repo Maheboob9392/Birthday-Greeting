@@ -33,7 +33,12 @@
 <section class="page">
 
 <div class="card">
-<h2>You are a Cutiee 💖</h2>
+
+<h2>You</h2>
+<h2>are</h2>
+<h2>a</h2>
+<h2>Cutiee 💖</h2>
+
 </div>
 
 <button onclick="nextPage()">Next →</button>
@@ -41,29 +46,63 @@
 </section>
 
 
-<!-- Page 3 -->
+<!-- Page 3 Balloon Game -->
 <section class="page">
 
-<h2>Pop all 4 balloons 🎈</h2>
+<h2>Pop all balloons 🎈</h2>
 
+<div class="balloon-area">
+
+<!-- Hidden words -->
+<div class="hidden-text">
+<span id="w1">You</span>
+<span id="w2">are</span>
+<span id="w3">very</span>
+<span id="w4">Beautiful</span>
+</div>
+
+<!-- Balloons -->
 <div class="balloons">
 
-<div class="balloon" onclick="popBalloon(this)"></div>
-<div class="balloon" onclick="popBalloon(this)"></div>
-<div class="balloon" onclick="popBalloon(this)"></div>
-<div class="balloon" onclick="popBalloon(this)"></div>
+<div class="balloon-wrap">
+<div class="balloon pink" onclick="popBalloon(this,'w1')"></div>
+<div class="string"></div>
+</div>
+
+<div class="balloon-wrap">
+<div class="balloon peach" onclick="popBalloon(this,'w2')"></div>
+<div class="string"></div>
+</div>
+
+<div class="balloon-wrap">
+<div class="balloon coral" onclick="popBalloon(this,'w3')"></div>
+<div class="string"></div>
+</div>
+
+<div class="balloon-wrap">
+<div class="balloon purple" onclick="popBalloon(this,'w4')"></div>
+<div class="string"></div>
+</div>
 
 </div>
+
+</div>
+
+<button id="finalBtn" onclick="nextPage()">Next →</button>
 
 </section>
 
 
-<!-- Page 4 -->
+<!-- Final Page -->
 <section class="page final">
 
-<h1>Happy Birthday Cutiepiee!</h1>
+<h1>Happy Birthday Cutiepiee! 🎂</h1>
 
 <div class="cake">🎂</div>
+
+<p class="wish">
+May your day be filled with happiness, love and smiles 💖
+</p>
 
 </section>
 
@@ -75,4 +114,3 @@
 
 </body>
 </html>
-
