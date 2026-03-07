@@ -6,176 +6,196 @@ font-family:Poppins;
 }
 
 body{
+
 background:linear-gradient(135deg,#ffd6e7,#ffe9f4,#f3e8ff);
+
 height:100vh;
+
 display:flex;
-justify-content:center;
+
 align-items:center;
+
+justify-content:center;
+
+overflow:hidden;
+
 }
 
-.phone{
-width:100%;
+.container{
+
+width:90%;
+
 max-width:420px;
-height:100vh;
-overflow:hidden;
-position:relative;
+
+text-align:center;
+
+z-index:2;
+
 }
 
 .page{
-position:absolute;
-width:100%;
-height:100%;
-padding:40px 20px;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
 
-transform:translateY(100%);
-transition:0.7s;
+display:none;
+
 }
 
 .page.active{
-transform:translateY(0);
+
+display:block;
+
 }
 
 .card{
+
 background:white;
+
 padding:40px 20px;
-border-radius:25px;
-box-shadow:0 10px 30px rgba(0,0,0,0.15);
+
+border-radius:20px;
+
 margin:20px 0;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+
 }
 
 button{
-padding:14px 28px;
-border:none;
-border-radius:30px;
-background:linear-gradient(45deg,#ff9ecf,#cba6ff);
-color:white;
-font-size:16px;
-cursor:pointer;
-margin-top:30px;
-}
 
-.tap{
-color:#777;
+padding:12px 25px;
+
+border:none;
+
+border-radius:25px;
+
+background:linear-gradient(45deg,#ff9ecf,#cba6ff);
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
 }
 
 h1,h2{
+
 color:#b14a7d;
+
 }
 
-/* Balloon area */
-
-.balloon-area{
-position:relative;
-margin-top:20px;
-}
-
-/* Hidden sentence */
+/* hidden message */
 
 .hidden-text{
-position:absolute;
-top:-40px;
-width:100%;
+
 display:flex;
+
 justify-content:space-around;
+
 font-size:22px;
-font-weight:600;
+
+margin-top:10px;
+
 color:#b14a7d;
+
 }
 
 .hidden-text span{
+
 opacity:0;
-transform:translateY(20px);
+
 transition:0.5s;
+
 }
 
 .hidden-text span.show{
+
 opacity:1;
-transform:translateY(0);
+
 }
 
-/* Balloon container */
+/* balloons */
 
 .balloons{
+
 display:flex;
-gap:18px;
-margin-top:40px;
+
+justify-content:space-around;
+
+margin-top:30px;
+
 }
 
-/* Balloon + ribbon */
-
 .balloon-wrap{
+
 display:flex;
+
 flex-direction:column;
+
 align-items:center;
+
+animation:float 3s infinite ease-in-out;
+
 }
 
 .balloon{
+
 width:70px;
+
 height:90px;
+
 border-radius:50%;
+
 cursor:pointer;
-transition:0.4s;
+
+transition:0.3s;
+
+box-shadow:inset -8px -12px 20px rgba(0,0,0,0.2);
+
 }
 
 .string{
+
 width:2px;
+
 height:60px;
+
 background:#888;
+
 }
 
-/* Balloon colors */
-
-.pink{
-background:radial-gradient(circle at 30% 30%,#fff,#ff9ecf);
-}
-
-.peach{
-background:radial-gradient(circle,#fff,#ffc0cb);
-}
-
-.coral{
-background:radial-gradient(circle,#fff,#ffb6c1);
-}
-
-.purple{
-background:radial-gradient(circle,#fff,#e0aaff);
-}
-
-/* Pop animation */
+.pink{background:#ff9ecf;}
+.peach{background:#ffc0cb;}
+.coral{background:#ffb6c1;}
+.purple{background:#d8b4ff;}
 
 .balloon.pop{
+
 transform:scale(0);
+
 opacity:0;
-}
 
-/* Final page */
-
-.final h1{
-font-family:Pacifico;
-font-size:30px;
-}
-
-.cake{
-font-size:90px;
-animation:float 2s infinite;
 }
 
 @keyframes float{
+
 0%{transform:translateY(0)}
-50%{transform:translateY(-15px)}
+50%{transform:translateY(-10px)}
 100%{transform:translateY(0)}
+
 }
 
-.wish{
-margin-top:20px;
-color:#555;
-}
+/* sparkles canvas */
 
-#finalBtn{
-display:none;
+#sparkles{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+z-index:1;
+
+pointer-events:none;
+
 }
