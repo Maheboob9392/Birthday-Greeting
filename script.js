@@ -44,21 +44,21 @@ nextPage();
 
 }
 
-/* typewriter message */
+/* typewriter */
 
-const message="A little surprise made just for you 💖";
+const text="I made a small surprise for you 💖";
 
 let i=0;
 
 function typeWriter(){
 
-if(i<message.length){
+if(i<text.length){
 
-document.getElementById("typeMessage").innerHTML+=message.charAt(i);
+document.getElementById("typeText").innerHTML+=text.charAt(i);
 
 i++;
 
-setTimeout(typeWriter,70);
+setTimeout(typeWriter,60);
 
 }
 
@@ -68,12 +68,11 @@ typeWriter();
 
 /* sparkles animation */
 
-const canvas=document.getElementById("sparkles");
+const canvas=document.getElementById("sparkleCanvas");
 
 const ctx=canvas.getContext("2d");
 
 canvas.width=window.innerWidth;
-
 canvas.height=window.innerHeight;
 
 let stars=[];
@@ -83,11 +82,8 @@ for(let i=0;i<100;i++){
 stars.push({
 
 x:Math.random()*canvas.width,
-
 y:Math.random()*canvas.height,
-
 size:Math.random()*2,
-
 speed:Math.random()*0.5
 
 });
@@ -110,11 +106,7 @@ ctx.fill();
 
 s.y+=s.speed;
 
-if(s.y>canvas.height){
-
-s.y=0;
-
-}
+if(s.y>canvas.height) s.y=0;
 
 });
 
