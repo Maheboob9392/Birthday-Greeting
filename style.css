@@ -1,201 +1,117 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins;
-}
+let pages=document.querySelectorAll(".page");
 
-body{
+let current=0;
 
-background:linear-gradient(135deg,#ffd6e7,#ffe9f4,#f3e8ff);
+function nextPage(){
 
-height:100vh;
+pages[current].classList.remove("active");
 
-display:flex;
+current++;
 
-align-items:center;
+if(current<pages.length){
 
-justify-content:center;
-
-overflow:hidden;
+pages[current].classList.add("active");
 
 }
 
-.container{
+}
 
-width:90%;
+/* balloon pop */
 
-max-width:420px;
+let popped=0;
 
-text-align:center;
+function popBalloon(balloon,word){
 
-z-index:2;
+if(balloon.classList.contains("pop")) return;
+
+document.getElementById("popSound").play();
+
+balloon.classList.add("pop");
+
+document.getElementById(word).classList.add("show");
+
+popped++;
+
+if(popped===4){
+
+setTimeout(()=>{
+
+nextPage();
+
+},1200)
 
 }
 
-.page{
+}
 
-display:none;
+/* typewriter */
+
+const text="I made a small surprise for you 💖";
+
+let i=0;
+
+function typeWriter(){
+
+if(i<text.length){
+
+document.getElementById("typeText").innerHTML+=text.charAt(i);
+
+i++;
+
+setTimeout(typeWriter,60);
 
 }
 
-.page.active{
+}
 
-display:block;
+typeWriter();
+
+/* sparkles animation */
+
+const canvas=document.getElementById("sparkleCanvas");
+
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+
+for(let i=0;i<100;i++){
+
+stars.push({
+
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*2,
+speed:Math.random()*0.5
+
+});
 
 }
 
-.card{
+function animate(){
 
-background:white;
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
-padding:40px 20px;
+ctx.fillStyle="white";
 
-border-radius:20px;
+stars.forEach(s=>{
 
-margin:20px 0;
+ctx.beginPath();
 
-box-shadow:0 10px 30px rgba(0,0,0,0.15);
+ctx.arc(s.x,s.y,s.size,0,Math.PI*2);
 
-}
+ctx.fill();
 
-button{
+s.y+=s.speed;
 
-padding:12px 25px;
+if(s.y>canvas.height) s.y=0;
 
-border:none;
+});
 
-border-radius:25px;
-
-background:linear-gradient(45deg,#ff9ecf,#cba6ff);
-
-color:white;
-
-font-size:16px;
-
-cursor:pointer;
+requestAnimationFrame(animate);
 
 }
 
-h1,h2{
-
-color:#b14a7d;
-
-}
-
-/* hidden message */
-
-.hidden-text{
-
-display:flex;
-
-justify-content:space-around;
-
-font-size:22px;
-
-margin-top:10px;
-
-color:#b14a7d;
-
-}
-
-.hidden-text span{
-
-opacity:0;
-
-transition:0.5s;
-
-}
-
-.hidden-text span.show{
-
-opacity:1;
-
-}
-
-/* balloons */
-
-.balloons{
-
-display:flex;
-
-justify-content:space-around;
-
-margin-top:30px;
-
-}
-
-.balloon-wrap{
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-animation:float 3s infinite ease-in-out;
-
-}
-
-.balloon{
-
-width:70px;
-
-height:90px;
-
-border-radius:50%;
-
-cursor:pointer;
-
-transition:0.3s;
-
-box-shadow:inset -8px -12px 20px rgba(0,0,0,0.2);
-
-}
-
-.string{
-
-width:2px;
-
-height:60px;
-
-background:#888;
-
-}
-
-.pink{background:#ff9ecf;}
-.peach{background:#ffc0cb;}
-.coral{background:#ffb6c1;}
-.purple{background:#d8b4ff;}
-
-.balloon.pop{
-
-transform:scale(0);
-
-opacity:0;
-
-}
-
-@keyframes float{
-
-0%{transform:translateY(0)}
-50%{transform:translateY(-10px)}
-100%{transform:translateY(0)}
-
-}
-
-/* sparkles canvas */
-
-#sparkles{
-
-position:fixed;
-
-top:0;
-
-left:0;
-
-z-index:1;
-
-pointer-events:none;
-
-}
+animate();
