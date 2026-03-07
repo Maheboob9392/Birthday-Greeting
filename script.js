@@ -1,112 +1,134 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // State & Variables
+    let currentScreenId = 'screen-loader';
+    let poppedBalloons = 0;
+
+    // Elements
+    const fillBar = document.getElementById('progress-fill');
+    const startBtn = document.getElementById('btn-start');
+    const decorateBtn = document.getElementById('btn-decorate');
+    const lightBtn = document.getElementById('btn-light');
+    const nextBalloonsBtn = document.getElementById('btn-next-balloons');
+    const nextMessageBtn = document.getElementById('btn-next-message');
+    const envelope = document.getElementById('envelope');
+    const nextGiftBtn = document.getElementById('btn-next-gift');
+    const giftBox = document.getElementById('gift-box');
+
+    // Utility to switch screens
+    function switchScreen(newScreenId) {
+        document.getElementById(currentScreenId).classList.remove('active');
+        setTimeout(() => {
+            document.getElementById(currentScreenId).classList.add('hidden');
+            document.getElementById(newScreenId).classList.remove('hidden');
+            
+            // Force reflow
+            void document.getElementById(newScreenId).offsetWidth;
+            
+            document.getElementById(newScreenId).classList.add('active');
+            currentScreenId = newScreenId;
+        }, 600); // matches CSS transition time
+    }
+
     // 1. Loader Logic
-    setTimeout(() => {
-        nextScreen('screen-loader', 'screen-start');
-    }, 3200); // Wait for progress bar animation
-});
+    setTimeout(() => { fillBar.style.width = '30%'; }, 500);
+    setTimeout(() => { fillBar.style.width = '70%'; }, 1500);
+    setTimeout(() => { 
+        fillBar.style.width = '100%'; 
+        setTimeout(() => switchScreen('screen-start'), 500);
+    }, 2500);
 
-// Screen transition function
-function nextScreen(currentId, nextId) {
-    const currentScreen = document.getElementById(currentId);
-    const nextScreenElement = document.getElementById(nextId);
-    
-    currentScreen.style.opacity = '0';
-    setTimeout(() => {
-        currentScreen.classList.remove('active');
-        nextScreenElement.classList.add('active');
-        // Slight delay for fade-in effect
-        setTimeout(() => {
-            nextScreenElement.style.opacity = '1';
-        }, 50);
-    }, 600); // Matches CSS transition time
-}
+    // 2. Start Button
+    startBtn.addEventListener('click', () => {
+        switchScreen('screen-cake');
+    });
 
-// 3. Decorate Cake
-function decorate() {
-    document.getElementById('banners').classList.add('show');
-    document.getElementById('candle').style.display = 'block';
-    
-    document.getElementById('btn-decorate').classList.add('hide');
-    document.getElementById('btn-light').classList.remove('hide');
-}
+    // 3. Decorate Button
+    decorateBtn.addEventListener('click', () => {
+        document.getElementById('bunting').classList.add('show');
+        document.getElementById('candle').style.display = 'block';
+        decorateBtn.style.display = 'none';
+        lightBtn.style.display = 'inline-block';
+    });
 
-// 4. Light Candle
-function lightCandle() {
-    document.getElementById('flame').classList.add('active');
-    document.getElementById('birthday-greeting').classList.remove('hide');
-    
-    document.getElementById('btn-light').classList.add('hide');
-    document.getElementById('btn-next-balloons').classList.remove('hide');
-    
-    triggerConfetti();
-}
+    // 4. Light Candle Button
+    lightBtn.addEventListener('click', () => {
+        document.getElementById('flame').style.display = 'block';
+        document.getElementById('cake-greeting').classList.add('show');
+        lightBtn.style.display = 'none';
+        nextBalloonsBtn.style.display = 'inline-block';
+        fireConfetti(50);
+    });
 
-// 5 & 6. Balloon Logic
-let poppedCount = 0;
-function popBalloon(balloonElement) {
-    if (balloonElement.classList.contains('popped')) return;
-    
-    // Play a small pop effect (CSS visual change)
-    balloonElement.classList.add('popped');
-    
-    // Show hidden word
-    const hiddenWord = balloonElement.previousElementSibling;
-    hiddenWord.classList.add('show');
-    
-    poppedCount++;
-    if (poppedCount === 4) {
-        triggerConfetti();
-        document.getElementById('btn-next-card').classList.remove('disabled');
-    }
-}
+    // 5. To Balloons Screen
+    nextBalloonsBtn.addEventListener('click', () => {
+        switchScreen('screen-balloons');
+    });
 
-// 7. Special Message
-function openEnvelope() {
-    const envelope = document.querySelector('.envelope');
-    if (!envelope.classList.contains('open')) {
+    // 6. Balloon Pop Logic (Attached globally for inline onclick)
+    window.popBalloon = function(element) {
+        if (element.style.transform === 'scale(0)') return; // already popped
+        
+        element.style.transform = 'scale(0)';
+        const word = element.previousElementSibling;
+        word.style.opacity = '1';
+        
+        poppedBalloons++;
+        fireConfetti(15);
+
+        if (poppedBalloons === 4) {
+            document.getElementById('balloon-instructions').innerText = "You're perfect!";
+            nextMessageBtn.classList.remove('disabled-btn');
+            nextMessageBtn.disabled = false;
+            setTimeout(() => fireConfetti(100), 500); // Big celebration
+        }
+    };
+
+    // 7. To Message Screen
+    nextMessageBtn.addEventListener('click', () => {
+        switchScreen('screen-message');
+    });
+
+    // 8. Open Envelope
+    envelope.addEventListener('click', () => {
         envelope.classList.add('open');
-        document.getElementById('btn-next-gift').classList.remove('hide');
-    }
-}
-
-// 8. Final Gift Note
-function openGift() {
-    const box = document.querySelector('.gift-box');
-    const notes = document.getElementById('gift-notes');
-    
-    if (!box.classList.contains('open')) {
-        box.classList.add('open');
-        notes.classList.remove('hide');
-        
-        const noteElements = document.querySelectorAll('.note');
-        noteElements.forEach(note => {
-            note.classList.add('show');
-        });
-        
-        triggerConfetti();
-    }
-}
-
-// Confetti Generator
-function triggerConfetti() {
-    const container = document.getElementById('confetti-container');
-    const colors = ['#ffb6c1', '#ffd700', '#ff69b4', '#87ceeb', '#dda0dd'];
-    
-    for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
-        confetti.classList.add('confetti-piece');
-        
-        // Randomize properties
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
-        confetti.style.animationDelay = Math.random() * 2 + 's';
-        
-        container.appendChild(confetti);
-        
-        // Cleanup after animation
         setTimeout(() => {
-            confetti.remove();
-        }, 5000);
+            nextGiftBtn.style.display = 'inline-block';
+        }, 1500);
+    });
+
+    // 9. To Final Gift Screen
+    nextGiftBtn.addEventListener('click', () => {
+        switchScreen('screen-gift');
+    });
+
+    // 10. Open Gift Box
+    giftBox.addEventListener('click', () => {
+        giftBox.classList.add('open');
+        fireConfetti(80);
+        setTimeout(() => {
+            document.getElementById('final-message').classList.add('show');
+        }, 500);
+    });
+
+    // --- Confetti Generator ---
+    function fireConfetti(amount) {
+        const container = document.getElementById('confetti-container');
+        const colors = ['#f3a6c2', '#e2cbff', '#ffdac1', '#ffb6c1', '#ffd700'];
+        
+        for (let i = 0; i < amount; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = Math.random() * 2 + 3 + 's';
+            confetti.style.opacity = Math.random() + 0.5;
+            
+            container.appendChild(confetti);
+            
+            // cleanup
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
     }
-}
+});
