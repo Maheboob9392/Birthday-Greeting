@@ -1,67 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Birthday Surprise</title>
 
 <link rel="stylesheet" href="style.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pacifico&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
-<div class="phone">
+<canvas id="sparkles"></canvas>
 
-<!-- Page 1 -->
-<section class="page active">
+<audio id="popSound">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_03c1b1c5f1.mp3?filename=balloon-pop-124476.mp3">
+</audio>
 
-<h2>A Special Message</h2>
-<p class="tap">Tap to open</p>
+<div class="container">
 
-<div class="card">
-<h1>Happy Birthday<br>to you</h1>
-</div>
+<!-- PAGE 1 -->
 
-<button onclick="nextPage()">Next →</button>
+<div class="page active">
 
-</section>
-
-
-<!-- Page 2 -->
-<section class="page">
+<h2 id="nameTitle">Happy Birthday Sample 🎉</h2>
 
 <div class="card">
 
-<h2>You</h2>
-<h2>are</h2>
-<h2>a</h2>
-<h2>Cutiee 💖</h2>
+<h1 id="typeMessage"></h1>
 
 </div>
 
 <button onclick="nextPage()">Next →</button>
 
-</section>
+</div>
 
 
-<!-- Page 3 Balloon Game -->
-<section class="page">
+<!-- PAGE 2 -->
 
-<h2>Pop all balloons 🎈</h2>
+<div class="page">
 
-<div class="balloon-area">
+<h2>Pop the balloons 🎈</h2>
 
-<!-- Hidden words -->
 <div class="hidden-text">
+
 <span id="w1">You</span>
 <span id="w2">are</span>
 <span id="w3">very</span>
 <span id="w4">Beautiful</span>
+
 </div>
 
-<!-- Balloons -->
 <div class="balloons">
 
 <div class="balloon-wrap">
@@ -88,27 +81,22 @@
 
 </div>
 
-<button id="finalBtn" onclick="nextPage()">Next →</button>
 
-</section>
+<!-- FINAL PAGE -->
 
+<div class="page final">
 
-<!-- Final Page -->
-<section class="page final">
-
-<h1>Happy Birthday Cutiepiee! 🎂</h1>
-
-<div class="cake">🎂</div>
+<h1>Happy Birthday Sample 🎂</h1>
 
 <p class="wish">
-May your day be filled with happiness, love and smiles 💖
-</p>
 
-</section>
+May your life be full of happiness, love and endless smiles 💖
+
+</p>
 
 </div>
 
-<canvas id="confetti"></canvas>
+</div>
 
 <script src="script.js"></script>
 
