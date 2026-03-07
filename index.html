@@ -3,35 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Happy Birthday</title>
+<title>Birthday Surprise</title>
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="container">
+<div class="phone">
 
-<h1 class="title">Happy Birthday 🎂</h1>
+<!-- Page 1 -->
+<section class="page active">
 
-<h2 class="name">My Dear Friend</h2>
+<h2>A Special Message</h2>
+<p class="tap">Tap to open</p>
 
-<p class="message">
-Wishing you a day filled with happiness, laughter, and unforgettable memories.
-You deserve all the love, joy, and success in the world.
-May this year bring beautiful moments and endless smiles to your life.
-✨ Happy Birthday! ✨
-</p>
+<div class="card">
+<h1>Happy Birthday<br>to you</h1>
+</div>
 
-<button id="celebrateBtn">Celebrate 🎉</button>
+<button onclick="nextPage()">Next →</button>
+
+</section>
+
+
+<!-- Page 2 -->
+<section class="page">
+
+<div class="card">
+<h2>You are a Cutiee 💖</h2>
+</div>
+
+<button onclick="nextPage()">Next →</button>
+
+</section>
+
+
+<!-- Page 3 -->
+<section class="page">
+
+<h2>Pop all 4 balloons 🎈</h2>
+
+<div class="balloons">
+
+<div class="balloon" onclick="popBalloon(this)"></div>
+<div class="balloon" onclick="popBalloon(this)"></div>
+<div class="balloon" onclick="popBalloon(this)"></div>
+<div class="balloon" onclick="popBalloon(this)"></div>
 
 </div>
 
-<div class="balloons"></div>
+</section>
+
+
+<!-- Page 4 -->
+<section class="page final">
+
+<h1>Happy Birthday Cutiepiee! 🎂</h1>
+
+<div class="cake">🎂</div>
+
+</section>
+
+</div>
+
 <canvas id="confetti"></canvas>
 
 <script src="script.js"></script>
