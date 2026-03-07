@@ -1,69 +1,140 @@
-// Balloon Generator
-
-const balloonContainer = document.querySelector(".balloons");
-
-function createBalloon(){
-
-const balloon = document.createElement("div");
-balloon.classList.add("balloon");
-
-balloon.style.left = Math.random()*100 + "vw";
-balloon.style.background = `hsl(${Math.random()*360},70%,60%)`;
-balloon.style.animationDuration = (5 + Math.random()*5) + "s";
-
-balloonContainer.appendChild(balloon);
-
-setTimeout(()=>{
-balloon.remove();
-},8000);
-
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
-setInterval(createBalloon,800);
-
-
-// Confetti Animation
-
-const canvas = document.getElementById("confetti");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let confetti = [];
-
-for(let i=0;i<150;i++){
-confetti.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-size:Math.random()*6+2,
-speed:Math.random()*3+1
-});
+body{
+background:linear-gradient(135deg,#ffd6e7,#ffe9f4,#f3e8ff);
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
 }
 
-function drawConfetti(){
+/* Instagram phone frame */
 
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-confetti.forEach(c=>{
-ctx.fillStyle=`hsl(${Math.random()*360},100%,50%)`;
-ctx.fillRect(c.x,c.y,c.size,c.size);
-c.y+=c.speed;
-
-if(c.y>canvas.height){
-c.y=0;
+.phone{
+width:100%;
+max-width:420px;
+height:100vh;
+position:relative;
+overflow:hidden;
 }
 
-});
+/* Pages */
 
-requestAnimationFrame(drawConfetti);
+.page{
+position:absolute;
+width:100%;
+height:100%;
+padding:40px 20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+
+background:transparent;
+
+transform:translateY(100%);
+transition:0.7s ease;
 }
 
-drawConfetti();
+.page.active{
+transform:translateY(0);
+}
 
+/* Card */
 
-// Celebrate Button
+.card{
+background:white;
+padding:40px 20px;
+border-radius:25px;
+box-shadow:0 15px 40px rgba(0,0,0,0.15);
+margin:20px 0;
+}
 
-document.getElementById("celebrateBtn").onclick = () => {
-alert("🎉 Let's Celebrate the Birthday! 🎂");
-};
+h1,h2{
+color:#b14a7d;
+}
+
+.tap{
+color:#777;
+margin-bottom:10px;
+}
+
+/* Button */
+
+button{
+padding:14px 30px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff9ecf,#cba6ff);
+color:white;
+font-size:16px;
+cursor:pointer;
+margin-top:20px;
+}
+
+/* Balloons */
+
+.balloons{
+display:flex;
+gap:15px;
+margin-top:40px;
+}
+
+.balloon{
+width:70px;
+height:90px;
+border-radius:50%;
+background:radial-gradient(circle at 30% 30%,#fff,#ff9ecf);
+cursor:pointer;
+transition:0.4s;
+}
+
+.balloon:nth-child(2){
+background:radial-gradient(circle,#fff,#ffc0cb);
+}
+
+.balloon:nth-child(3){
+background:radial-gradient(circle,#fff,#ffb6c1);
+}
+
+.balloon:nth-child(4){
+background:radial-gradient(circle,#fff,#e0aaff);
+}
+
+.balloon.pop{
+transform:scale(0);
+opacity:0;
+}
+
+/* Final cake */
+
+.final h1{
+font-family:'Pacifico',cursive;
+font-size:30px;
+margin-bottom:20px;
+}
+
+.cake{
+font-size:90px;
+animation:float 2s infinite ease-in-out;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-15px)}
+100%{transform:translateY(0)}
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+pointer-events:none;
+}
