@@ -1,34 +1,34 @@
-let pages = document.querySelectorAll(".page");
-let current = 0;
+let pages=document.querySelectorAll(".page");
+let current=0;
 
 function nextPage(){
 
 pages[current].classList.remove("active");
 current++;
 
-if(current < pages.length){
+if(current<pages.length){
 pages[current].classList.add("active");
 }
 
 }
 
-let popped = 0;
+let popped=0;
 
-function popBalloon(el){
+function popBalloon(balloon,wordId){
 
-if(!el.classList.contains("pop")){
+if(balloon.classList.contains("pop")) return;
 
-el.classList.add("pop");
+balloon.classList.add("pop");
+
+document.getElementById(wordId).classList.add("show");
+
 popped++;
 
-}
+if(popped===4){
 
-if(popped === 4){
+document.getElementById("finalBtn").style.display="inline-block";
 
-setTimeout(()=>{
-nextPage();
 startConfetti();
-},600)
 
 }
 
@@ -37,13 +37,13 @@ startConfetti();
 
 /* Confetti */
 
-const canvas = document.getElementById("confetti");
-const ctx = canvas.getContext("2d");
+const canvas=document.getElementById("confetti");
+const ctx=canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 
-let confetti = [];
+let confetti=[];
 
 function startConfetti(){
 
@@ -52,17 +52,17 @@ for(let i=0;i<150;i++){
 confetti.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
-size:Math.random()*6+4,
+size:Math.random()*6+3,
 speed:Math.random()*3+2
-})
+});
 
 }
 
-animateConfetti();
+animate();
 
 }
 
-function animateConfetti(){
+function animate(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
@@ -75,8 +75,8 @@ p.y+=p.speed;
 
 if(p.y>canvas.height) p.y=0;
 
-})
+});
 
-requestAnimationFrame(animateConfetti);
+requestAnimationFrame(animate);
 
 }
