@@ -4,21 +4,21 @@
    ============================================ */
 
 :root {
-  --pink:        #f9a8c9;
-  --pink-deep:   #e87ca0;
-  --pink-light:  #fce4ec;
-  --lavender:    #c5b3e6;
+  --pink:           #f9a8c9;
+  --pink-deep:      #e87ca0;
+  --pink-light:     #fce4ec;
+  --lavender:       #c5b3e6;
   --lavender-light: #ede7f6;
-  --peach:       #ffcba4;
-  --peach-light: #fff3e0;
-  --cream:       #fff8f0;
-  --purple:      #7b4fa6;
-  --purple-dark: #4a2060;
-  --text-dark:   #5c2d50;
-  --text-mid:    #8e4d7c;
-  --white:       #ffffff;
-  --shadow:      rgba(200,130,180,0.18);
-  --radius:      32px;
+  --peach:          #ffcba4;
+  --peach-light:    #fff3e0;
+  --cream:          #fff8f0;
+  --purple:         #7b4fa6;
+  --purple-dark:    #4a2060;
+  --text-dark:      #5c2d50;
+  --text-mid:       #8e4d7c;
+  --white:          #ffffff;
+  --shadow:         rgba(200,130,180,0.18);
+  --radius:         32px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -92,7 +92,6 @@ html, body {
 }
 .btn:hover  { transform: scale(1.05); }
 .btn:active { transform: scale(0.97); }
-
 .btn-primary {
   background: linear-gradient(135deg, var(--lavender), var(--pink));
   color: var(--purple-dark);
@@ -176,11 +175,11 @@ html, body {
 .cake-3d {
   position: relative; display: flex; flex-direction: column; align-items: center;
   filter: drop-shadow(0 6px 18px rgba(232,124,160,0.3));
-  /* 25% smaller than original */
-  transform: scale(0.75);
+  transform: scale(0.75);       /* 25% smaller */
   transform-origin: bottom center;
 }
 .cake-3d.small { transform: scale(0.58); transform-origin: bottom center; }
+
 .cake-top-layer {
   width: 140px; height: 55px;
   background: linear-gradient(180deg, #f5e6c8, #eedcb0);
@@ -212,19 +211,18 @@ html, body {
   border-radius: 50%;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
-/* Candle: flame on TOP, then candle body below it */
+
+/* Candle: flex column — flame div is FIRST child = renders on TOP */
 .cake-candle {
   position: absolute; top: -55px; left: 50%; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center;
 }
-/* Flame is rendered FIRST (top of flex column = top visually) */
 .candle-flame {
   width: 16px; height: 22px;
   background: radial-gradient(ellipse at 50% 80%, #fff176, #ffb300 40%, #ff6d00 80%);
   border-radius: 50% 50% 30% 30%;
   box-shadow: 0 0 14px 6px rgba(255,180,0,0.6), 0 0 30px 10px rgba(255,120,0,0.3);
-  animation: flicker 0.4s ease-in-out infinite alternate;
-  /* No order override needed — flame div comes before body in HTML */
+  animation: flicker 0.3s ease-in-out infinite alternate;
 }
 @keyframes flicker {
   from { transform: scaleX(1)   scaleY(1)   rotate(-2deg); opacity: 0.95; }
@@ -249,7 +247,7 @@ html, body {
 }
 @keyframes confettiFall {
   0%   { transform: translateY(-20px) rotate(0deg);   opacity: 1; }
-  100% { transform: translateY(300px) rotate(720deg); opacity: 0; }
+  100% { transform: translateY(320px) rotate(720deg); opacity: 0; }
 }
 
 /* ─── BALLOONS ─── */
@@ -261,7 +259,6 @@ html, body {
 .balloons-area {
   display: flex; justify-content: center; gap: 14px;
   flex-wrap: nowrap; padding: 10px 0 80px;
-  position: relative;
 }
 .balloon-item {
   display: flex; flex-direction: column; align-items: center;
@@ -275,7 +272,7 @@ html, body {
   0%,100% { transform: translateY(0); }
   50%      { transform: translateY(-10px); }
 }
-.balloon-item:hover { filter: brightness(1.08) scale(1.05); }
+.balloon-item:hover  { filter: brightness(1.08); transform: scale(1.05); }
 .balloon-item:active { transform: scale(0.95); }
 
 .balloon {
@@ -283,7 +280,6 @@ html, body {
   border-radius: 50% 50% 45% 45%;
   position: relative;
   box-shadow: inset -6px -6px 12px rgba(0,0,0,0.08), inset 6px 6px 12px rgba(255,255,255,0.5);
-  transition: all 0.3s;
 }
 .balloon::after {
   content: '';
@@ -308,33 +304,31 @@ html, body {
   background: linear-gradient(180deg, #bbb, #999);
 }
 
-/* Revealed word tag — shown below the string after pop */
+/* Word tag — hidden by default, revealed after pop */
 .balloon-word {
   font-family: 'Nunito', sans-serif;
   font-weight: 900;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: var(--purple-dark);
   background: linear-gradient(135deg, #fce4ec, #ede7f6);
   border: 1.5px solid rgba(180,140,210,0.35);
   border-radius: 20px;
-  padding: 4px 10px;
-  margin-top: 4px;
+  padding: 3px 9px;
+  margin-top: 5px;
   white-space: nowrap;
   box-shadow: 0 2px 8px rgba(180,100,180,0.15);
-  /* Hidden by default */
   opacity: 0;
-  transform: scale(0.5) translateY(-8px);
-  transition: opacity 0s, transform 0s;
+  transform: scale(0.5) translateY(-6px);
+  transition: none;
   pointer-events: none;
 }
 
-/* When balloon is popped: shrink balloon, show word nicely */
 .balloon-item.popped { animation: none !important; }
 .balloon-item.popped .balloon {
   animation: popAnim 0.35s ease forwards;
 }
 .balloon-item.popped .balloon-word {
-  animation: wordReveal 0.5s cubic-bezier(.22,1,.36,1) 0.25s forwards;
+  animation: wordReveal 0.5s cubic-bezier(.22,1,.36,1) 0.28s forwards;
 }
 
 @keyframes popAnim {
@@ -344,7 +338,7 @@ html, body {
 }
 @keyframes wordReveal {
   0%   { opacity: 0; transform: scale(0.4) translateY(-10px); }
-  70%  { transform: scale(1.12) translateY(2px); }
+  65%  { transform: scale(1.15) translateY(2px); }
   100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
@@ -353,8 +347,7 @@ html, body {
   font-family: 'Nunito', sans-serif;
   font-weight: 900; font-size: 1.15rem; color: var(--purple);
   margin-top: 4px; letter-spacing: 0.04em;
-  transition: all 0.4s;
-  text-align: center;
+  transition: all 0.4s; text-align: center;
 }
 
 /* ─── MESSAGE CARD / LETTER ─── */
@@ -394,8 +387,8 @@ html, body {
   font-size: 1.8rem; color: var(--purple-dark); line-height: 1.3; margin: 8px 0;
 }
 .letter-content p {
-  font-family: 'Quicksand', sans-serif; font-size: 0.92rem;
-  color: var(--text-dark); line-height: 1.7; font-weight: 500;
+  font-family: 'Quicksand', sans-serif; font-size: 0.88rem;
+  color: var(--text-dark); line-height: 1.75; font-weight: 500;
 }
 
 /* ─── GIFT BOX ─── */
@@ -404,7 +397,10 @@ html, body {
   font-family: 'Nunito', sans-serif; font-weight: 900;
   color: var(--purple-dark); font-size: 1.4rem; margin-bottom: 20px;
 }
-.gift-scene { position: relative; min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.gift-scene {
+  position: relative; min-height: 220px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
 .gift-box {
   cursor: pointer; position: relative;
   width: 130px; margin: 0 auto;
@@ -451,7 +447,8 @@ html, body {
 .gift-tap-hint { color: var(--text-mid); font-size: 0.9rem; margin-top: 10px; font-weight: 500; }
 .gift-box.opened .gift-lid { transform: translateY(-80px) rotate(-20deg); opacity: 0; }
 .gift-reveal {
-  text-align: center; animation: revealIn 0.7s cubic-bezier(.22,1,.36,1) both;
+  text-align: center;
+  animation: revealIn 0.7s cubic-bezier(.22,1,.36,1) both;
 }
 @keyframes revealIn {
   from { transform: scale(0.8) translateY(20px); opacity: 0; }
@@ -479,10 +476,6 @@ html, body {
   .welcome-title { font-size: 1.2rem; }
   .balloon { width: 50px; height: 60px; }
   .balloon-string { height: 48px; }
-  .cake-top-layer { width: 120px; }
-  .cake-mid-layer { width: 138px; }
-  .cake-bot-layer { width: 148px; }
-  .cake-plate { width: 170px; }
 }
 @media (min-width: 600px) {
   .card-container { max-width: 440px; padding: 44px 36px 40px; }
@@ -495,16 +488,16 @@ html, body {
   font-size: 1rem; animation: sparklePop 0.8s ease forwards;
 }
 @keyframes sparklePop {
-  0%   { transform: scale(0) rotate(0deg);   opacity: 1; }
+  0%   { transform: scale(0) rotate(0deg);    opacity: 1; }
   60%  { transform: scale(1.4) rotate(180deg); opacity: 1; }
-  100% { transform: scale(0) rotate(360deg); opacity: 0; }
+  100% { transform: scale(0) rotate(360deg);  opacity: 0; }
 }
 
 /* ─── SCROLLBAR ─── */
 .letter-back::-webkit-scrollbar { width: 4px; }
 .letter-back::-webkit-scrollbar-thumb { background: var(--lavender); border-radius: 4px; }
 
-/* ─── WATERMARK ─── */
+/* ─── WATERMARK ~Rahman ─── */
 .watermark {
   position: fixed;
   bottom: 14px;
