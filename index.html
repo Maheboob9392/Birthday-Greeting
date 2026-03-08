@@ -54,7 +54,7 @@
       <div class="panda">🐼</div>
     </div>
     <h2 class="welcome-title">A Cutiepie was born<br>today, 21 years ago!</h2>
-    <p class="welcome-sub">Yes, it's YOU! A little surprise awaits...</p>
+    <p class="welcome-sub">Yes, it's YOU! A little surprise awaits... 🎁</p>
     <button class="btn btn-primary" onclick="goTo('screen-cake')">
       🎁 Start the surprise
     </button>
@@ -71,7 +71,7 @@
   <div class="card-container">
     <div class="cake-scene" id="cake-scene">
       <div class="cake-3d">
-        <!-- CANDLE: flame FIRST (top), body SECOND (bottom) -->
+        <!-- Flame FIRST so it renders on top in flex column -->
         <div class="cake-candle" id="cake-candle">
           <div class="candle-flame" id="candle-flame" style="display:none"></div>
           <div class="candle-body"></div>
@@ -129,37 +129,31 @@
     <p class="balloon-instruction">Pop all 4 balloons 🎈</p>
     <div class="balloons-area" id="balloons-area">
 
-      <!-- Each balloon-item is position:relative so word overlays inside balloon -->
-      <div class="balloon-item" data-word="You" onclick="popBalloon(this)">
-        <div class="balloon pink">
-          <span class="balloon-word">You</span>
-        </div>
+      <div class="balloon-item" data-index="0" data-word="You" onclick="popBalloon(this)">
+        <div class="balloon pink"></div>
         <div class="balloon-string"></div>
+        <div class="balloon-word">You</div>
       </div>
 
-      <div class="balloon-item" data-word="Are" onclick="popBalloon(this)">
-        <div class="balloon peach-light">
-          <span class="balloon-word">Are</span>
-        </div>
+      <div class="balloon-item" data-index="1" data-word="Are" onclick="popBalloon(this)">
+        <div class="balloon peach-light"></div>
         <div class="balloon-string"></div>
+        <div class="balloon-word">Are</div>
       </div>
 
-      <div class="balloon-item" data-word="Very" onclick="popBalloon(this)">
-        <div class="balloon peach">
-          <span class="balloon-word">Very</span>
-        </div>
+      <div class="balloon-item" data-index="2" data-word="Very" onclick="popBalloon(this)">
+        <div class="balloon peach"></div>
         <div class="balloon-string"></div>
+        <div class="balloon-word">Very</div>
       </div>
 
-      <div class="balloon-item" data-word="Gorgeous" onclick="popBalloon(this)">
-        <div class="balloon lavender">
-          <span class="balloon-word">Gorgeous</span>
-        </div>
+      <div class="balloon-item" data-index="3" data-word="Gorgeous" onclick="popBalloon(this)">
+        <div class="balloon lavender"></div>
         <div class="balloon-string"></div>
+        <div class="balloon-word">Gorgeous😘</div>
       </div>
 
     </div>
-    <div class="popped-words-row" id="popped-words-row"></div>
     <div class="popped-message" id="popped-message"></div>
     <button class="btn btn-soft" id="btn-balloon-next" style="display:none" onclick="goTo('screen-message')">Next →</button>
   </div>
@@ -173,14 +167,14 @@
   </div>
   <div class="bunting"></div>
   <div class="card-container message-card">
-    <h2 class="msg-title">A Special Message</h2>
-    <p class="msg-tap">Tap to open</p>
+    <h2 class="msg-title">A Special Message 💌</h2>
+    <p class="msg-tap">Tap to open 🌸</p>
     <div class="letter-wrap" id="letter-wrap" onclick="openLetter()">
       <div class="letter-front" id="letter-front">
         <div class="letter-front-inner">
           <div class="letter-balloons">🎈 🌟 🎈</div>
-          <p class="letter-front-text">Happy<br>Birthday<br>to you</p>
-          <div class="letter-balloons">🎈 💜 🎈</div>
+          <p class="letter-front-text">Happy<br>Birthday<br>to you 💕</p>
+          <div class="letter-balloons">✨ 🤍 ✨</div>
         </div>
       </div>
       <div class="letter-back" id="letter-back">
@@ -201,7 +195,7 @@
   </div>
   <div class="bunting"></div>
   <div class="card-container gift-card">
-    <h2 class="gift-title">One Last Thing...</h2>
+    <h2 class="gift-title">One Last Thing... 🎁</h2>
     <div class="gift-scene">
       <div class="gift-box" id="gift-box" onclick="openGift()">
         <div class="gift-lid" id="gift-lid">
@@ -220,7 +214,7 @@
       <div class="gift-reveal" id="gift-reveal" style="display:none">
         <div class="panda">🐱</div>
         <h3>Lots of love for you ❤️</h3>
-        <p>Once again, Happy Birthday!<br>Hope you loved your surprise.</p>
+        <p>Once again, Happy Birthday!<br>Hope you loved your surprise. 🌸</p>
         <button class="btn btn-pink" onclick="replayAll()">↺ Replay</button>
       </div>
     </div>
